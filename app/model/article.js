@@ -267,7 +267,10 @@ exports.getPage = function(pageId, callback) {
     });
 
 }
-exports.update = function(id, content, callback) {
+exports.update = function ({
+        id,
+        content
+    }, callback) {
     var result;
     var inserts = [];
     inserts.push(id);

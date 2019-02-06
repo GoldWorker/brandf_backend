@@ -10,9 +10,9 @@ var email = require("../lib/email.js");
 var article = require("../model/article.js");
 // var mysql = require("mysql");
 
-exports.get_once = function(req, res, id) {
+exports.get_once = function (req, res, id) {
     if (id) {
-        article.get(id, function(result) {
+        article.get(id, function (result) {
             console.log(result);
             res.end(JSON.stringify(result));
         });
@@ -21,24 +21,24 @@ exports.get_once = function(req, res, id) {
     }));
 }
 
-exports.get_all = function(req, res, args) {
-    article.getAll(function(result) {
+exports.get_all = function (req, res, args) {
+    article.getAll(function (result) {
         console.log(result);
         res.end(JSON.stringify(result));
     })
 }
 
-exports.get_page = function(req, res, pageId) {
+exports.get_page = function (req, res, pageId) {
 
-    article.getPage(pageId, function(result) {
+    article.getPage(pageId, function (result) {
         console.log(result);
         res.end(JSON.stringify(result));
     })
 }
 
-exports.post = function(req, res, args) {
+exports.post = function (req, res, args) {
     var art = req.bodyData;
-    article.add(art.title, '0', art.content, function(result) {
+    article.add(art.title, '0', art.content, function (result) {
         console.log(result);
         // console.log(req.bodyData);
         if (result) {
@@ -51,9 +51,12 @@ exports.post = function(req, res, args) {
     });
 }
 
-exports.put = function(req, res, args) {
+exports.put = function (req, res, args) {
     var art = req.bodyData;
-    article.update(art.id, art.content, function(result) {
+    article.update({
+        id: art.id,
+        content: art.content
+    }, function (result) {
         console.log(result);
         if (result) {
             res.end(JSON.stringify({
@@ -65,17 +68,17 @@ exports.put = function(req, res, args) {
     })
 }
 
-exports.delete_once = function(req, res, id) {
-    article.del(id, function() {
+exports.delete_once = function (req, res, id) {
+    article.del(id, function () {
         res.end(JSON.stringify({
             result: "delete success"
         }));
     })
 }
 
-exports.get_status = function(req, res, id) {
+exports.get_status = function (req, res, id) {
     if (id) {
-        article.status_get(id, function(result) {
+        article.status_get(id, function (result) {
             console.log(result);
             res.end(JSON.stringify(result));
         })
@@ -86,9 +89,9 @@ exports.get_status = function(req, res, id) {
 
 }
 
-exports.put_status = function(req, res, id, status) {
+exports.put_status = function (req, res, id, status) {
     if (id && status) {
-        article.status_update(id, status, function(result) {
+        article.status_update(id, status, function (result) {
             console.log(result);
             if (result) {
                 res.end(JSON.stringify({
