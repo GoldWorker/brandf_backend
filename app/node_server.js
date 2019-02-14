@@ -16,7 +16,10 @@ var app = http.createServer(function(req, res) {
     });
     req.on("end", function() {
         // 调试阶段-设置允许跨域请求
-        res.setHeader('Access-Control-Allow-Origin', 'http://www.brandf.cn');
+        if (req.headers.origin == 'http://localhost:8080' || req.headers.origin == 'http://www.brandf.cn') {
+            res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+        }
+        // res.setHeader('Access-Control-Allow-Origin', 'http://www.brandf.cn');
         // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
         res.setHeader('Access-Control-Allow-Credentials', true);
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
