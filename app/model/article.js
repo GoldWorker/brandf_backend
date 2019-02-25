@@ -14,7 +14,7 @@ var DB = require("../lib/sqlConfig.js").DB;
 
 var addSQL = "insert into article (path, status, title, date) values (?,?,?,?)";
 var getSQL = 'select path,title,date from article where id=?';
-var getAllSQL = 'select id,title,path,status from article';
+var getAllSQL = 'select * from article ORDER BY date DESC';
 var getPageSQL = "select * from `article` ORDER BY date DESC limit ?,?";
 var delSQL = 'delete from article where id=?';
 var updateSQL = 'select path from article where id=?';
